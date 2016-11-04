@@ -10,6 +10,7 @@ namespace JOS.Console
 		public string NumberAsString { get; set; }
 		public List<string> Humans { get; set; }
 		public List<int> Ages { get; set; }
-		public List<float> Temperatures { get; set; } 
+		public List<float> Temperatures { get; set; }
+		public char Char { get; set; }
 	}
 }

@@ -14,8 +14,14 @@ namespace JOS.TypedArgs
 			RegisteredPropertyTypeHandlers.TryGetValue(fullName, out propertyTypeHandler);
 			return propertyTypeHandler;
 		} 
-		private static Dictionary<string, IPropertyTypeHandler> GetRegisteredPropertyTypeHandlers() {
-			var types = Assembly.GetExecutingAssembly().GetTypes().Where( x => x.IsDefined(typeof(PropertyTypeHandlerAttribute))).Select(t => t.IsGenericType ? t.GetGenericTypeDefinition() : t);
+		private static Dictionary<string, IPropertyTypeHandler> GetRegisteredPropertyTypeHandlers()
+		{
+			string[] ignoreNamespace = {"Microsoft", "System", "mscorlib", "vshost"};
+			var types = AppDomain.CurrentDomain.GetAssemblies()
+				.Where(x => !ignoreNamespace.Any(i => x.FullName.StartsWith(i)))
+				.SelectMany(t => t.GetTypes().Where(a => a.IsDefined(typeof(PropertyTypeHandlerAttribute)))
+				.Select(z => z.IsGenericType ? z.GetGenericTypeDefinition() : z));
+			
 			var tmpDict = new Dictionary<string, IPropertyTypeHandler>();
 			foreach (var type in types) {
 				var attribute = Attribute.GetCustomAttribute(type, typeof(PropertyTypeHandlerAttribute)) as PropertyTypeHandlerAttribute;
