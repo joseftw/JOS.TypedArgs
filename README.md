@@ -1,6 +1,5 @@
 # JOS.TypedArgs
-Binds the string[] args to a typed class
-
+Binds the provided args string[] in the Main method of a Console Application to a typed class.
 ###Usage
 Add a class with all of your expected paramters as properties like this
 
