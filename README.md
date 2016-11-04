@@ -76,8 +76,8 @@ myConsoleApplication.exe -humans Josef Ottosson|Carl|Silvia -verbose -filePath c
 ```
 Outcome
 ```csharp
-	var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
-	var humans = typedArgs.Humans; // List containing Josef Ottosson, Carl and Silvia
-	var verbose = typedArgs.Verbose; // true
-	var filePath = typedArgs.FilePath; // c:\\temp
+var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+var humans = typedArgs.Humans; // List containing Josef Ottosson, Carl and Silvia
+var verbose = typedArgs.Verbose; // true
+var filePath = typedArgs.FilePath; // c:\\temp
 ```
