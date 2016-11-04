@@ -4,11 +4,14 @@ using System.Reflection;
 
 namespace JOS.TypedArgs
 {
-	public class ArgsHelper
+	public class ArgsHelper<T>
 	{
-		public T GetTypedArgs<T>(string[] args) where T : class {
+		public static T Value => _value;
+		private static T _value { get; set; }
+		public static T GetTypedArgs(string[] args) {
 			var groupedArguments = GroupArguments(args);
-			var typedArguments = GetTypedArguments<T>(groupedArguments);
+			var typedArguments = GetTypedArguments(groupedArguments);
+			_value = typedArguments;
 			return typedArguments;
 		}
 
@@ -33,7 +36,7 @@ namespace JOS.TypedArgs
 			return arguments;
 		}
 
-		private static T GetTypedArguments<T>(Dictionary<string, object> groupedArguments) {
+		private static T GetTypedArguments(Dictionary<string, object> groupedArguments) {
 			var typedArguments = Activator.CreateInstance<T>();
 			foreach (var groupedArgument in groupedArguments) {
 				var property = typedArguments.GetType().GetProperty(groupedArgument.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
