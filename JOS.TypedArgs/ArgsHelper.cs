@@ -15,6 +15,13 @@ namespace JOS.TypedArgs
 			return typedArguments;
 		}
 
+		public static void SetTypedArgs(string[] args)
+		{
+			var groupedArguments = GroupArguments(args);
+			var typedArguments = GetTypedArguments(groupedArguments);
+			_value = typedArguments;
+		}
+
 		private static Dictionary<string, object> GroupArguments(IReadOnlyList<string> args) {
 			var arguments = new Dictionary<string, object>();
 			for(var i = 0; i < args.Count; i++) {

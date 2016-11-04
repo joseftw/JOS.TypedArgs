@@ -2,10 +2,11 @@
 
 namespace JOS.Console
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args) {
-			var typeArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+		public static void Main(string[] args)
+		{
+			var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
 		}
 	}
 }
