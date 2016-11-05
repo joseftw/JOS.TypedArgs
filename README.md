@@ -54,19 +54,12 @@ public class Program
 ###Add support for your own types
 Create a new class and implement the `IPropertyTypeHandler` interface. You will also need to mark the class with the `PropertyTypeHandler` attribute
 ```csharp
-[PropertyTypeHandler(PropertyType = typeof(bool))]
-public class BoolPropertyTypeHandler : IPropertyTypeHandler
+[PropertyTypeHandler(PropertyType = typeof(char))]
+public class CharPropertyTypeHandler : IPropertyTypeHandler
 {
 	public object GetTypedValue(object propertyValue)
 	{
-		if (propertyValue == null)
-		{
-			return true;
-		}
-
-		bool result;
-		bool.TryParse(propertyValue.ToString(), out result);
-		return result;
+		return Convert.ToChar(propertyValue);
 	}
 }
 ```
