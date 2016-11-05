@@ -41,6 +41,18 @@ public class Program
 	}
 }
 ```
+###Settings
+You can set the following settings
+```csharp
+//List of strings containing the starting section of a namespace you want to ignore when using reflection to find classes implementing the IPropertyTypeHandler
+TypedArgsSettings.IgnoreNamespaces = new List<string> {"YourNameHere"}; //Default value: new List<string> {"Microsoft", "System", "mscorlib", "vshost"}
+
+//Separator used when splitting values for List<> properties
+TypedArgsSettings.Separator = '&'; //Default value: '|'
+
+//Determs if a ValidationException should be thrown. If false, a Result object with an Error list will be returned.
+TypedArgsSettings.ThrowWhenValidationFails = false; //Default value: true
+```
 
 ###Supported properties out of the box
 * `bool`
