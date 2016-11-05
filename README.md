@@ -1,5 +1,8 @@
 # JOS.TypedArgs
 Binds the provided args string[] in the Main method of a Console Application to a typed class.
+###Installation
+`Install-Package JOS.TypedArgs`
+
 ###Usage
 Create a class with all of your expected paramters as properties like this
 
@@ -51,19 +54,12 @@ public class Program
 ###Add support for your own types
 Create a new class and implement the `IPropertyTypeHandler` interface. You will also need to mark the class with the `PropertyTypeHandler` attribute
 ```csharp
-[PropertyTypeHandler(PropertyType = typeof(bool))]
-public class BoolPropertyTypeHandler : IPropertyTypeHandler
+[PropertyTypeHandler(PropertyType = typeof(char))]
+public class CharPropertyTypeHandler : IPropertyTypeHandler
 {
 	public object GetTypedValue(object propertyValue)
 	{
-		if (propertyValue == null)
-		{
-			return true;
-		}
-
-		bool result;
-		bool.TryParse(propertyValue.ToString(), out result);
-		return result;
+		return Convert.ToChar(propertyValue);
 	}
 }
 ```
@@ -77,6 +73,31 @@ Outcome
 ```csharp
 var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
 var humans = typedArgs.Humans; // List containing Josef Ottosson, Carl and Silvia
+var verbose = typedArgs.Verbose; // true
+var filePath = typedArgs.FilePath; // c:\\temp
+```
+###Default values
+You can set default values like this
+```csharp
+public class TypedArguments
+{
+	public string FilePath { get; set; } = "c:\\temp"
+	public int FileCount { get; set; }
+	public float Degrees { get; set; }
+	public string NumberAsString { get; set; }
+	public List<string> Humans { get; set; }
+	public List<int> Ages { get; set; }
+	public List<float> Temperatures { get; set; }
+	public bool Verbose { get; set; } = true
+}
+```
+Input
+```
+myConsoleApplication.exe -humans Josef Ottosson|Carl|Silvia
+```
+Outcome
+```csharp
+var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
 var verbose = typedArgs.Verbose; // true
 var filePath = typedArgs.FilePath; // c:\\temp
 ```
