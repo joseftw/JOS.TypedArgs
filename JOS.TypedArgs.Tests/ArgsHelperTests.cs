@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using System.ComponentModel.DataAnnotations;
+using Shouldly;
 using Xunit;
 
 namespace JOS.TypedArgs.Tests
@@ -211,6 +212,27 @@ namespace JOS.TypedArgs.Tests
 				() => ArgsHelper<TypedArgumentsWithDefaultValues>.Value.Humans.ShouldContain("Carl"),
 				() => ArgsHelper<TypedArgumentsWithDefaultValues>.Value.Verbose.ShouldBeFalse()
 			);
+		}
+
+		[Fact]
+		public void GivenTypedArgumentsWithRequiredParameters_WhenSetTypedArgsGetsCalledAndThrowSettingIsTrue_ThenShouldThrowValidationError()
+		{
+			string[] args = {};
+			Should.Throw<ValidationException>(() => ArgsHelper<TypedArgumentsWithRequiredParameters>.SetTypedArgs(args));
+		}
+
+		[Fact]
+		public void GivenTypedArgumentsWithRequiredParameters_WhenSetTypedArgsGetsCalledAndThrowSettingIsFalse_ThenShouldReturnErrors()
+		{
+			string[] args = { };
+			var oldSetting = TypedArgsSettings.ThrowWhenValidationFails;
+			TypedArgsSettings.ThrowWhenValidationFails = false;
+
+			var result = ArgsHelper<TypedArgumentsWithRequiredParameters>.SetTypedArgs(args);
+
+			result.Success.ShouldBeFalse();
+			result.Errors.Count.ShouldBe(1);
+			TypedArgsSettings.ThrowWhenValidationFails = oldSetting;
 		}
 	}
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reflection;
 
 namespace JOS.TypedArgs
@@ -9,11 +11,42 @@ namespace JOS.TypedArgs
 		public static T Value => _value;
 		private static T _value { get; set; }
 
-		public static void SetTypedArgs(string[] args)
+		public static Result SetTypedArgs(string[] args)
 		{
 			var groupedArguments = GroupArguments(args);
+			var validationResult = ValidateParameters(groupedArguments);
+			if (!validationResult.Success)
+			{
+				if (TypedArgsSettings.ThrowWhenValidationFails)
+				{
+					var message = string.Join(Environment.NewLine, validationResult.Errors.Select(x => x.ToString()));
+					throw new ValidationException(message);
+				}
+				return validationResult;
+			}
 			var typedArguments = GetTypedArguments(groupedArguments);
 			_value = typedArguments;
+			return new Result();
+		}
+
+		private static Result ValidateParameters(IReadOnlyDictionary<string, object> args)
+		{
+			var requiredProperties =
+				typeof(T).GetProperties().Where(x => Attribute.IsDefined(x, typeof(RequiredAttribute)));
+
+			var errors = new List<Error>();
+			foreach (var requiredProperty in requiredProperties)
+			{
+				if (!args.ContainsKey(requiredProperty.Name))
+				{
+					errors.Add(new Error
+					{
+						Title = "Missing required parameter",
+						Message = $"The parameter {requiredProperty.Name} is required"
+					});
+				}
+			}
+			return new Result {Errors = errors};
 		}
 
 		private static Dictionary<string, object> GroupArguments(IReadOnlyList<string> args) {

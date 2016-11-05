@@ -12,5 +12,7 @@ namespace JOS.TypedArgs
 			"mscorlib",
 			"vshost"
 		};
+
+		public static bool ThrowWhenValidationFails { get; set; } = true;
 	}
 }
