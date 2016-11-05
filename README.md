@@ -9,6 +9,7 @@ Create a class with all of your expected paramters as properties like this
 ```csharp
 public class TypedArguments
 {
+	[Required]
 	public string FilePath { get; set; }
 	public int FileCount { get; set; }
 	public float Degrees { get; set; }
