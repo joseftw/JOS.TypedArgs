@@ -1,5 +1,8 @@
 # JOS.TypedArgs
 Binds the provided args string[] in the Main method of a Console Application to a typed class.
+###Installation
+`Install-Package JOS.TypedArgs`
+
 ###Usage
 Create a class with all of your expected paramters as properties like this
 
