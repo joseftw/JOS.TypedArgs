@@ -80,3 +80,28 @@ var humans = typedArgs.Humans; // List containing Josef Ottosson, Carl and Silvi
 var verbose = typedArgs.Verbose; // true
 var filePath = typedArgs.FilePath; // c:\\temp
 ```
+###Default values
+You can set default values like this
+```csharp
+public class TypedArguments
+{
+	public string FilePath { get; set; } = "c:\\temp"
+	public int FileCount { get; set; }
+	public float Degrees { get; set; }
+	public string NumberAsString { get; set; }
+	public List<string> Humans { get; set; }
+	public List<int> Ages { get; set; }
+	public List<float> Temperatures { get; set; }
+	public bool Verbose { get; set; } = true
+}
+```
+Input
+```
+myConsoleApplication.exe -humans Josef Ottosson|Carl|Silvia
+```
+Outcome
+```csharp
+var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+var verbose = typedArgs.Verbose; // true
+var filePath = typedArgs.FilePath; // c:\\temp
+```
