@@ -6,7 +6,7 @@ namespace JOS.TypedArgs.Tests
 	public class ArgsHelperTests
 	{
 		[Fact]
-		public void GivenMultipleArgs_WhenGetTypedArgs_ThenShouldReturnCorrectlyTypedArguments()
+		public void GivenMultipleArgs_WhenSetTypedArgs_ThenShouldReturnCorrectlyTypedArguments()
 		{
 			string[] args = { "-filePath", "c:\temp",
 				"--fileCount", "2",
@@ -32,7 +32,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenBoolArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenBoolArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args =  {"-verbose"};
 
@@ -42,7 +42,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenFloatArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenFloatArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-degrees", "37.8"};
 
@@ -52,7 +52,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenFloatArgumentWithComma_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenFloatArgumentWithComma_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = { "-degrees", "37,8" };
 
@@ -62,7 +62,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenStringArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenStringArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-filePath", "c:\\temp"};
 
@@ -72,7 +72,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenIntArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenIntArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-fileCount", "2"};
 
@@ -82,7 +82,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenIntListArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenIntListArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-ages", "10|1337|2019"};
 
@@ -95,7 +95,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenStringListArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenStringListArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-humans", "Josef Ottosson|Carl|Silvia"};
 
@@ -108,7 +108,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenFloatListArgument_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenFloatListArgument_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			string[] args = {"-temperatures", "12|20|22.2|19,2"};
 
@@ -122,7 +122,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenCustomListSeparator_WhenGetTypedArgs_ThenShouldBindCorrectly()
+		public void GivenCustomListSeparator_WhenSetTypedArgs_ThenShouldBindCorrectly()
 		{
 			TypedArgsSettings.Separator = '&';
 			string[] args = { "-temperatures", "12&20&22.2&19,2" };
@@ -138,7 +138,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void WhenGetTypedArgs_ThenValueShouldBePopulated()
+		public void WhenSetTypedArgs_ThenValueShouldBePopulated()
 		{
 			string[] args = { "-temperatures", "12|20|22.2|19,2" };
 
@@ -152,7 +152,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenTypedArgumentsWithDefaultValues_WhenGetTypedArgs_ThenShouldReturnDefaultValues()
+		public void GivenTypedArgumentsWithDefaultValues_WhenSetTypedArgs_ThenShouldReturnDefaultValues()
 		{
 			string[] args = {};
 
@@ -179,7 +179,7 @@ namespace JOS.TypedArgs.Tests
 		}
 
 		[Fact]
-		public void GivenTypedArgumentsWithDefaultValues_WhenGetTypedArgsGetsCalledWithSuppliedParameters_ThenShouldReturnSuppliedValues()
+		public void GivenTypedArgumentsWithDefaultValues_WhenSetTypedArgsGetsCalledWithSuppliedParameters_ThenShouldReturnSuppliedValues()
 		{
 			string[] args = { "-filePath", "c:\\temp",
 				"--fileCount", "20",
