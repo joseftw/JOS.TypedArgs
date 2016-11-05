@@ -9,7 +9,6 @@ Create a class with all of your expected paramters as properties like this
 ```csharp
 public class TypedArguments
 {
-	[Required]
 	public string FilePath { get; set; }
 	public int FileCount { get; set; }
 	public float Degrees { get; set; }
@@ -114,3 +113,13 @@ var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
 var verbose = typedArgs.Verbose; // true
 var filePath = typedArgs.FilePath; // c:\\temp
 ```
+###Required parameters
+You can make a parameter required with the `Required` attribute
+```csharp
+public class TypedArguments
+{
+	[Required]
+	public string FilePath { get; set; } = "c:\\temp"
+}
+```
+If a required parameter is missing, the default behaviour is to throw a `ValidationException`. You can change this in the settings and take care of the feedback to the user yourself if you want to.
