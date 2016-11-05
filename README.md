@@ -42,7 +42,7 @@ public class Program
 }
 ```
 ###Settings
-You can set the following settings
+You can change the following settings
 ```csharp
 //List of strings containing the starting section of a namespace you want to ignore when using reflection to find classes implementing the IPropertyTypeHandler
 TypedArgsSettings.IgnoreNamespaces = new List<string> {"YourNameHere"}; //Default value: new List<string> {"Microsoft", "System", "mscorlib", "vshost"}
