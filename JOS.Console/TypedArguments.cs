@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Build.Framework;
 
 namespace JOS.Console
 {
@@ -6,6 +7,7 @@ namespace JOS.Console
 	{
 		public string FilePath { get; set; } = "c\\temp";
 		public int FileCount { get; set; }
+		[Required]
 		public float Degrees { get; set; }
 		public string NumberAsString { get; set; }
 		public List<string> Humans { get; set; }

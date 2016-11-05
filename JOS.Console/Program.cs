@@ -6,7 +6,7 @@ namespace JOS.Console
 	{
 		public static void Main(string[] args)
 		{
-			var typedArgs = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 			var hej = ArgsHelper<TypedArguments>.Value;
 		}
 	}

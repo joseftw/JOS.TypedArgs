@@ -8,12 +8,6 @@ namespace JOS.TypedArgs
 	{
 		public static T Value => _value;
 		private static T _value { get; set; }
-		public static T GetTypedArgs(string[] args) {
-			var groupedArguments = GroupArguments(args);
-			var typedArguments = GetTypedArguments(groupedArguments);
-			_value = typedArguments;
-			return typedArguments;
-		}
 
 		public static void SetTypedArgs(string[] args)
 		{

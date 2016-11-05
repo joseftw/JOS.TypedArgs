@@ -16,18 +16,19 @@ namespace JOS.TypedArgs.Tests
 				"-humans", "Josef Ottosson|Carl|Silvia",
 				"-ages", "10|1337|2019",
 				"-temperatures", "30|20|22|12,3"};
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
-			result.FileCount.ShouldBe(2);
-			result.FilePath.ShouldBe("c:\temp");
-			result.Degrees.ShouldBe(37);
-			result.NumberAsString.ShouldBe("22");
-			result.Temperatures.Count.ShouldBe(4);
-			result.Ages.Count.ShouldBe(3);
-			result.Humans.Count.ShouldBe(3);
-			result.Humans.ShouldContain("Josef Ottosson");
-			result.Humans.ShouldContain("Carl");
-			result.Humans.ShouldContain("Silvia");
-			result.Verbose.ShouldBe(true);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
+
+			ArgsHelper<TypedArguments>.Value.FileCount.ShouldBe(2);
+			ArgsHelper<TypedArguments>.Value.FilePath.ShouldBe("c:\temp");
+			ArgsHelper<TypedArguments>.Value.Degrees.ShouldBe(37);
+			ArgsHelper<TypedArguments>.Value.NumberAsString.ShouldBe("22");
+			ArgsHelper<TypedArguments>.Value.Temperatures.Count.ShouldBe(4);
+			ArgsHelper<TypedArguments>.Value.Ages.Count.ShouldBe(3);
+			ArgsHelper<TypedArguments>.Value.Humans.Count.ShouldBe(3);
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Josef Ottosson");
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Carl");
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Silvia");
+			ArgsHelper<TypedArguments>.Value.Verbose.ShouldBe(true);
 		}
 
 		[Fact]
@@ -35,9 +36,9 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args =  {"-verbose"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Verbose.ShouldBe(true);
+			ArgsHelper<TypedArguments>.Value.Verbose.ShouldBe(true);
 		}
 
 		[Fact]
@@ -45,9 +46,9 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-degrees", "37.8"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Degrees.ShouldBe(37.8f);
+			ArgsHelper<TypedArguments>.Value.Degrees.ShouldBe(37.8f);
 		}
 
 		[Fact]
@@ -55,9 +56,9 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = { "-degrees", "37,8" };
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Degrees.ShouldBe(37.8f);
+			ArgsHelper<TypedArguments>.Value.Degrees.ShouldBe(37.8f);
 		}
 
 		[Fact]
@@ -65,9 +66,9 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-filePath", "c:\\temp"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.FilePath.ShouldBe("c:\\temp");
+			ArgsHelper<TypedArguments>.Value.FilePath.ShouldBe("c:\\temp");
 		}
 
 		[Fact]
@@ -75,9 +76,9 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-fileCount", "2"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.FileCount.ShouldBe(2);
+			ArgsHelper<TypedArguments>.Value.FileCount.ShouldBe(2);
 		}
 
 		[Fact]
@@ -85,12 +86,12 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-ages", "10|1337|2019"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Ages.Count.ShouldBe(3);
-			result.Ages.ShouldContain(10);
-			result.Ages.ShouldContain(1337);
-			result.Ages.ShouldContain(2019);
+			ArgsHelper<TypedArguments>.Value.Ages.Count.ShouldBe(3);
+			ArgsHelper<TypedArguments>.Value.Ages.ShouldContain(10);
+			ArgsHelper<TypedArguments>.Value.Ages.ShouldContain(1337);
+			ArgsHelper<TypedArguments>.Value.Ages.ShouldContain(2019);
 		}
 
 		[Fact]
@@ -98,12 +99,12 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-humans", "Josef Ottosson|Carl|Silvia"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Humans.Count.ShouldBe(3);
-			result.Humans.ShouldContain("Josef Ottosson");
-			result.Humans.ShouldContain("Carl");
-			result.Humans.ShouldContain("Silvia");
+			ArgsHelper<TypedArguments>.Value.Humans.Count.ShouldBe(3);
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Josef Ottosson");
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Carl");
+			ArgsHelper<TypedArguments>.Value.Humans.ShouldContain("Silvia");
 		}
 
 		[Fact]
@@ -111,13 +112,13 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = {"-temperatures", "12|20|22.2|19,2"};
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
-			result.Temperatures.Count.ShouldBe(4);
-			result.Temperatures.ShouldContain(12);
-			result.Temperatures.ShouldContain(20);
-			result.Temperatures.ShouldContain(22.2f);
-			result.Temperatures.ShouldContain(19.2f);
+			ArgsHelper<TypedArguments>.Value.Temperatures.Count.ShouldBe(4);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(12);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(20);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(22.2f);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(19.2f);
 		}
 
 		[Fact]
@@ -126,14 +127,14 @@ namespace JOS.TypedArgs.Tests
 			TypedArgsSettings.Separator = '&';
 			string[] args = { "-temperatures", "12&20&22.2&19,2" };
 
-			var result = ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 			TypedArgsSettings.Separator = '|';
 
-			result.Temperatures.Count.ShouldBe(4);
-			result.Temperatures.ShouldContain(12);
-			result.Temperatures.ShouldContain(20);
-			result.Temperatures.ShouldContain(22.2f);
-			result.Temperatures.ShouldContain(19.2f);
+			ArgsHelper<TypedArguments>.Value.Temperatures.Count.ShouldBe(4);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(12);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(20);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(22.2f);
+			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(19.2f);
 		}
 
 		[Fact]
@@ -141,7 +142,7 @@ namespace JOS.TypedArgs.Tests
 		{
 			string[] args = { "-temperatures", "12|20|22.2|19,2" };
 
-			ArgsHelper<TypedArguments>.GetTypedArgs(args);
+			ArgsHelper<TypedArguments>.SetTypedArgs(args);
 
 			ArgsHelper<TypedArguments>.Value.Temperatures.Count.ShouldBe(4);
 			ArgsHelper<TypedArguments>.Value.Temperatures.ShouldContain(12);
