@@ -5,7 +5,14 @@
 	{
 		public object GetTypedValue(object propertyValue)
 		{
-			return true;
+			if (propertyValue == null)
+			{
+				return true;
+			}
+
+			bool result;
+			bool.TryParse(propertyValue.ToString(), out result);
+			return result;
 		}
 	}
 }

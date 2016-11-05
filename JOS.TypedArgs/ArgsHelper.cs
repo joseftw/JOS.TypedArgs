@@ -51,8 +51,9 @@ namespace JOS.TypedArgs
 					continue;
 				}
 
+				var defaultValue = property.GetValue(typedArguments);
 				var propertyValue = GetTypedProperty(property.PropertyType, groupedArgument.Value);
-				property.SetValue(typedArguments, propertyValue, null);
+				property.SetValue(typedArguments, propertyValue ?? defaultValue, null);
 			}
 			return typedArguments;
 		}
@@ -61,7 +62,7 @@ namespace JOS.TypedArgs
 			var handler = PropertyTypeHandler.GetPropertyTypeHandler(propertyType);
 
 			if(handler == null) {
-				throw new NotImplementedException(string.Format("Couldn't find any IPropertyTypeHandler for type {0}", propertyType.FullName));
+				throw new NotImplementedException($"Couldn't find any IPropertyTypeHandler for type {propertyType.FullName}");
 			}
 
 			var value = handler.GetTypedValue(propertyValue);
